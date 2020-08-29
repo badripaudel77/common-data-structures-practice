@@ -21,6 +21,9 @@ import java.util.Arrays;
         //write the logic to push all the elements smaller than the pivot to the left so that greater than pivot will be to the right automatically.
       }
 
+      BigO : O(n^2)
+            Best case : O(n* logn)
+
   */
 // Quick sort in Java
 
@@ -36,7 +39,11 @@ class QuickSort {
 
         // Put the elements smaller than pivot on the left and
         // greater than pivot on the right of pivot
+
+        // O(n)
         for (int j = low; j <= high-1; j++) {
+
+            //O(n)
             if (array[j] <= pivot) {
                 int temp = array[pIndex];
                 array[pIndex] = array[j];
@@ -77,5 +84,4 @@ class QuickSort {
         System.out.println("After   sorting : " + Arrays.toString(elements));
 
     }
-
 }
