@@ -53,7 +53,6 @@ package com.cs.dsa.sorting;
             int minValue = elements[minIndex];
             elements[minIndex] = elements[i];
             elements[i] = minValue;
-
         }
 
         System.out.print("\nAfter Sorting the array is : " );

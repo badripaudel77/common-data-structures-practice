@@ -4,7 +4,6 @@ import java.util.Arrays;
 
  /*
       Insertion sort divides the whole array into the two sub arrays and maintains one as sorted and one as unsorted.
-
       for eg : left sub-array is the sorted and right as unsorted.
 
     -- The element to be inserted at the left (sorted part ) has to find the appropriate position to insert.

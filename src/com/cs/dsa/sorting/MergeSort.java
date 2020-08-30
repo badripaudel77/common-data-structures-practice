@@ -4,7 +4,7 @@ package com.cs.dsa.sorting;
 [ follows recursion approach ]
 
 Merge sort is a sorting technique based on divide and conquer technique.
-With worst-case time complexity being Ο(n log n), it is one of the most respected algorithms.
+With worst-case time complexity being Ο(n log n), it is one of the efficient algorithms.
 
 low, high, middle = ( low + high ) /2
 

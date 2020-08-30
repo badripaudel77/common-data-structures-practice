@@ -1,7 +1,7 @@
 package com.cs.dsa.stack_queue;
 
  /*
-    Queue is also similar to stack but it follows FIFO approach.
+    Queue [ linear queue ] is also similar to stack but it follows FIFO approach.
     First added is first to be deleted.
     Open at both ends.
 
@@ -17,7 +17,7 @@ public class Queue {
 
     int size;
     int elements[];
-    int rear, front;
+    int front;
 
     public Queue(int size) {
         this.size = size;

@@ -14,7 +14,6 @@ import java.util.Arrays;
        partition(Arr, start, end); //finding the pivot element to get number 2.
        sortLeft(Arr, start, pivotPostion-1)
        sortRight(Arr, pivotPostion+1, end)
-
       }
 
       partition(A, st, end) {
