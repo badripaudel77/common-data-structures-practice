@@ -17,7 +17,6 @@ public class MathPower {
 
         float result = calcPower(base,power);
         System.out.println(base + " raise to the power of " + power + " = " + result);
-
     }
 
     public static float calcPower(int base, int exp) {

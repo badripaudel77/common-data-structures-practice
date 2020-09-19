@@ -7,12 +7,11 @@ package com.cs.dsa.sorting;
 
    (n-1) + (n-2) + ..... + 3 + 2 +1  = n(n-1) /2 = n^2/2 + n/2 = O(n^2)
  */
-public class BubbleSort {
 
+public class BubbleSort {
     public static void main(String[] args) {
 
         int elements[] = { 45, 36,12 ,-1, 0};
-
         BubbleSort.sortElements(elements);
     }
 
@@ -20,7 +19,6 @@ public class BubbleSort {
     public static void sortElements(int [] elements) {
         int len = elements.length;
         int i ,j;
-        int temp;
 
         System.out.print("Original Array is : " );
         for ( i = 0; i < len; i++) {
@@ -35,10 +33,7 @@ public class BubbleSort {
             {
                 if(elements[j] > elements[j+1])
                 {
-                    // swap the elements
-                    temp = elements[j];
-                    elements[j] = elements[j+1];
-                    elements[j+1] = temp;
+                    swap(j, j+1, elements);
                 }
             }
         }
@@ -47,6 +42,14 @@ public class BubbleSort {
         for ( i = 0; i < len; i++) {
             System.out.print(" " + elements[i]);
         }
+    }
+
+    private static void swap(int i, int j, int [] elements) {
+        int temp;
+        // swap the elements
+        temp = elements[j-1];
+        elements[j-1] = elements[j];
+        elements[j] = temp;
     }
 }
 

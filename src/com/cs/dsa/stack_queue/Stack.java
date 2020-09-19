@@ -20,7 +20,7 @@ public class Stack {
     int top;
 
     public Stack(int size) {
-         elements = new int[size];
+         elements = new int[size]; //create stack out of that given size
          capacity = size;
          top = -1; // initially stack is empty
     }

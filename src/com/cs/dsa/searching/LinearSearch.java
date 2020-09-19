@@ -1,16 +1,13 @@
 package com.cs.dsa.searching;
 
 /*
-
    We do linear search of any items.
-   Linear simply mean fron left to right [ r ti l ]  as in daily life.
+   Linear simply mean from left to right [ r ti l ]  as in daily life.
    Array Search , if not found returns -1.
 
   - has time complexity of n i.e Big Oh of n O(n) as time is linearly dependent on input size of an array
-
  */
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class LinearSearch {
@@ -20,10 +17,10 @@ public class LinearSearch {
         int itmes[] = {12, 34, 5, 6, 67};
         int itemToSearch = 6;
 
-        int itemToUpdate = 6;
+        int itemToUpdate = 34;
         int updateValue = 23;
 
-        int itemToDelete = 12;
+        int itemToDelete = 23;
 
         //call the method [for searching]
         System.out.println("original array is " + Arrays.toString(itmes));
@@ -96,22 +93,20 @@ public class LinearSearch {
             System.out.println("sorry the element "+ elemToUpdate + " is not present in items array.");
             return;
         }
-        else items[i] = updateValue;
+        else items[index] = updateValue;
 
         System.out.print("After updating an element " + elemToUpdate + " at index " + index + "array is : ");
         for (i = 0; i < lenOfItems; i++) {
-
             System.out.print(" " + items[i]);
         }
     }
 
     //delete the item from items
-    public static void deleteElement(int items[], int itemToDelete) {
-        //length of an array items
+    public static void deleteElement(int items[], int itemToDelete){
         int lenOfItems = items.length;
         int i;
-        Integer index = null;
 
+        Integer index = null;
         if (lenOfItems <= 0) {
             System.out.println("Please pass some elements. ");
             return;
@@ -120,7 +115,7 @@ public class LinearSearch {
         //traverse each array items ,for n inputs it has to iterate n times, so complexity is O(n)
         for (i = 0; i < lenOfItems; i++) {
             if (items[i] == itemToDelete) {
-                //if item is found, then set index to i
+                //if item is found, then set i to index
                 index = i;
                 break;
             }
@@ -130,13 +125,13 @@ public class LinearSearch {
                 return;
             }
 
-            int newLen = lenOfItems -1;
-            for (i = 0; i < newLen; i++) {
-                items[index] = items[index + 1];
+            for (i = index; i < lenOfItems-1; ++i) {
+                System.out.print("index " + i);
+                items[i] = items[i + 1];
             }
 
             System.out.print("After deleting an item " + itemToDelete +" at index " + index + " the array is : ");
-            for (i = 0; i < newLen; i++) {
+            for (i = 0; i < lenOfItems-1; i++) {
                 System.out.print(" " + items[i]);
             }
         }

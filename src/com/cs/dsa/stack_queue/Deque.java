@@ -26,7 +26,6 @@ public class Deque {
 
     //insert from the front side
     private void insertFront(int item) {
-
         //System.out.println(arr[0]);
         if (isFull()) {
             System.out.println("Queue is already full.");

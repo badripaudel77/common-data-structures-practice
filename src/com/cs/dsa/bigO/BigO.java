@@ -19,19 +19,15 @@ public class BigO {
 }
 
 class BigO1 extends Object {
-
     public void bigO1( int [] numbers ) {
-
         System.out.println("Big O of 1 : O(n)");
         //O(1) as always the same complexity no matter of the inputs and size
-        System.out.println(numbers[0]);
-
+        if(numbers.length>0) System.out.println(numbers[0]);
     }
 }
+
 class BigOn extends Object {
-
     public void bigOn( int [] numbers ) {
-
         System.out.println("Big O of n : O(n)");
         //O(n) as input size matters for the function to give output
         for(int num : numbers) {
@@ -39,12 +35,10 @@ class BigOn extends Object {
         }
         System.out.println();
     }
-
 }
+
 class BigOn2 extends Object {
-
     public void bigOn2( int [] numbers ) {
-
         //Here we're nesting two loops.
         //If our array has n items, our outer loop runs n times and
         //our inner loop runs n times for each iteration of the outer loop,
@@ -59,7 +53,6 @@ class BigOn2 extends Object {
             for(int num2 : numbers) {
                 System.out.printf("%d %d ", num1, num2);
             }
-
         }
     }
 }

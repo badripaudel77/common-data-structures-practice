@@ -40,7 +40,6 @@ public class MergeSort {
         int mid ;
 
         if(begin < end) {
-
             mid = (begin + end) / 2;
 
             sort(arr, begin, mid); // recursively divide half left to mid
