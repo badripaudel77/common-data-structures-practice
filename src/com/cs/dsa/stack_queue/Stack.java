@@ -12,13 +12,12 @@ package com.cs.dsa.stack_queue;
     all of the operations are bigO(1).
  */
 
-
 public class Stack {
+    private  int elements[]; //elements in stack
+    private int capacity; //capacity(size) of the stack
+    int top; //will give the top value from the stack
 
-    private  int elements[];
-    private int capacity;
-    int top;
-
+    //create the stack which is empty by default at the start
     public Stack(int size) {
          elements = new int[size]; //create stack out of that given size
          capacity = size;
@@ -77,6 +76,5 @@ public class Stack {
         stack.push(3);
         stack.push(4);
         stack.size();
-
     }
 }

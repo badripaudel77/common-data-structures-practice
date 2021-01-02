@@ -30,7 +30,7 @@ public class MathPower {
 
         else  if(exp < 0) return  (float) 1 / calcPower(base, (-1) * exp);
 
-        else  return base * calcPower(base, exp -1);
+        return base * calcPower(base, exp -1);
     }
 }
 

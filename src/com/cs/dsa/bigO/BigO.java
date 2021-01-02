@@ -1,9 +1,7 @@
 package com.cs.dsa.bigO;
 
 public class BigO {
-
     public static void main(String[] args) {
-
         int arr[] = {3,4,5};
 
         BigO1 bigO1 = new BigO1();
@@ -14,7 +12,6 @@ public class BigO {
 
         BigOn2 bigOn2 = new BigOn2();
         bigOn2.bigOn2(arr);
-
     }
 }
 
