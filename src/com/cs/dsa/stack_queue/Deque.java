@@ -7,13 +7,15 @@ from either from the front or rear.
 Thus, it does not follow FIFO rule (First In First Out).
 
 operations :
-            Add from the front, Add from the back, Remove from the front, Remove from the back, get front and get back, isEmpty and isFull
+            -Add from the front, Add from the back,
+            -Remove from the front, Remove from the back, get front and get back,
+            -isEmpty and isFull
 */
 
 import org.w3c.dom.ls.LSOutput;
 
 public class Deque {
-    int arr[];
+    int[] arr;
     int size;
     int front, rear;
 
@@ -112,14 +114,12 @@ public class Deque {
     }
 
     private boolean isEmpty() {
-        if (front == -1) return true;
-        return false;
+        return front == -1;
     }
 
     private boolean isFull() {
         if (front == 0 && rear == size - 1) return true;
-        if (front == rear + 1) return true; // rear == front-1
-        return false;
+        return front == rear + 1; // rear == front-1
     }
 
     public void getFront() {

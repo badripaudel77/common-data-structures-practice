@@ -22,7 +22,7 @@ package com.cs.dsa.stack_queue;
 public class CircularQueue {
 
     int size;
-    int elements[];
+    int[] elements;
     int front, rear;
 
     public CircularQueue(int size) {
@@ -68,15 +68,13 @@ public class CircularQueue {
 
     private boolean isEmpty() {
 
-        if(front == -1) return  true;
-        return false;
+        return front == -1;
     }
 
     private boolean isFull() {
 
         if(front == 0 && rear == size -1) return  true;
-        if(front == rear + 1) return  true;
-        return false;
+        return front == rear + 1;
     }
 
     private void size() {

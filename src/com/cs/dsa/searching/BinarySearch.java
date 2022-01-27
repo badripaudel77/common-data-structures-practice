@@ -1,5 +1,4 @@
 package com.cs.dsa.searching;
-
 /*
   Binary Search is done on the sorting array. Its complexity is O(log n).
   Follows " Divide and conquer " approach.

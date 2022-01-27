@@ -12,8 +12,8 @@ package com.cs.dsa.linkedlist;
 */
 
 public class LinkedList {
-     Node head;
-     //create class Node that will have data and next, head will point to the first Node
+    Node head;
+    //create class Node that will have data and next, head will point to the first Node
 
     class Node {
         int data;
@@ -25,12 +25,13 @@ public class LinkedList {
             this.next = null;
         }
 
+        // Insert at the end
         private void insert(LinkedList linkedList, int data) {
             //create node out of that data
             Node newNode = new Node(data);
 
-            /* see if the list is empty */
-            if(linkedList.head == null) {
+            /* see if the list is empty, it's going to be first node */
+            if (linkedList.head == null) {
                 head = newNode;
             }
 
@@ -38,12 +39,23 @@ public class LinkedList {
             else {
                 Node lastNode = linkedList.head;
                 while (lastNode.next != null) {
-                     lastNode = lastNode.next;
+                    lastNode = lastNode.next;
                 }
                 //insert
                 lastNode.next = newNode;
             }
             //System.out.println("Linked list is created => " + linkedList.head.data);
+        }
+
+        // Insert at the beginning
+        private void insertAtFront(LinkedList linkedList, int data) {
+            Node newNode = new Node(data);
+            if (head == null) {
+                head = newNode;
+            } else {
+                newNode.next = head;
+                head = newNode;
+            }
         }
 
         //print the data
@@ -60,15 +72,16 @@ public class LinkedList {
     }
 
     public static void main(String[] args) {
-        var linkedList = new LinkedList();
+        LinkedList linkedList = new LinkedList();
         LinkedList.Node node = linkedList.new Node(4);
 
-        node.insert(linkedList,5);
-        node.insert(linkedList,15);
-        node.insert(linkedList,25);
-        node.insert(linkedList,35);
-        node.insert(linkedList,45);
-
+        node.insert(linkedList, 5);
+        node.insert(linkedList, 15);
+        node.insert(linkedList, 25);
+        node.insert(linkedList, 35);
+        node.insert(linkedList, 45);
+        node.insertAtFront(linkedList, 33);
+        node.insertAtFront(linkedList, 330);
         node.printData(linkedList);
     }
 }

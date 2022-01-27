@@ -1,21 +1,28 @@
 package com.cs.dsa.stack_queue;
 
 /*
-   Stack is an "abstract data type" that means defined by user's point of view in terms of possible values and operation
-   on these data types.
+    Stack is an "abstract data type" that means defined by user's point of view in terms of possible values and operation
+    on these data types.
 
-   Possible operations in stack [ follows LIFO ]:
+    Possible operations in stack [ follows LIFO ]:
     ==> push(item), pop(), isFull(), isEmpty(), size(), ....
 
-    Open at only one end.
+    Open at only one end (i.e adding and removing is possible only at the one end).
 
     all of the operations are bigO(1).
+
+    applications :
+    1) google tabs history
+    2) editor undo program
  */
 
 public class Stack {
-    private  int elements[]; //elements in stack
-    private int capacity; //capacity(size) of the stack
-    int top; //will give the top value from the stack
+
+    //NOTE : final variable can be initialized in constructor only
+
+    private final int[] elements; //elements in stack
+    private final int capacity; //capacity(size) of the stack
+    private int top; //will give the top value from the stack
 
     //create the stack which is empty by default at the start
     public Stack(int size) {
@@ -25,9 +32,10 @@ public class Stack {
     }
 
     private void push(int item) {
-       //only can push if stack is not full already
+        //only can push if stack is not full already
         if(!isFull()) {
-            top ++; // increase the value of top to next , if it was -1 at the beginning, at the first step it will be 0, first index
+            // increase the value of top to next , if it was -1 at the beginning, at the first step it will be 0, first index
+            top ++;
             elements[top] = item;
             System.out.println("Item "+ item + " inserted successfully");
         }
@@ -36,7 +44,7 @@ public class Stack {
 
     //remove the item
     private void pop() {
-          //only can remove if not empty already.
+        //only can remove if not empty already.
         if(!isEmpty()) {
             //point top to the one index below
             System.out.println("Item " + elements[top] + " deleted successfully.");
@@ -76,5 +84,7 @@ public class Stack {
         stack.push(3);
         stack.push(4);
         stack.size();
+        stack.currentSize();
+        System.out.println();
     }
 }

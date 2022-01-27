@@ -17,7 +17,7 @@ package com.cs.dsa.sorting;
 
         int elements[] = {45, 36, 12, -1, 0};
 
-        var sort = new SelectionSortTest();
+        SelectionSortTest sort = new SelectionSortTest();
         sort.sortElements(elements);
     }
 }
@@ -26,7 +26,7 @@ package com.cs.dsa.sorting;
 
     //sorting elem
     public  void sortElements(int [] elements) {
-        var len  = elements.length;
+        int len  = elements.length;
         int i ,j;
         int minIndex;
 
