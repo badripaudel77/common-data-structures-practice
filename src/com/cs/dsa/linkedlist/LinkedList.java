@@ -58,6 +58,28 @@ public class LinkedList {
             }
         }
 
+        // provided the key, it deletes the node
+        private void deleteNode(int key) {
+            Node headNode = head; // get the current head
+            Node prevNode = null; // initialize prev. node to null
+            // if node to be deleted is head itself
+            if(headNode.data == key) {
+                head = headNode.next;
+                return;
+            }
+           // if node to be deleted is other than head itself, just traverse
+           while (headNode!= null && headNode.data !=key) {
+               prevNode = headNode;
+               headNode = prevNode.next;
+           }
+           // not found
+           if(headNode == null) {
+               return;
+           }
+           // found
+           prevNode.next = headNode.next;
+        }
+
         //print the data
         private void printData(LinkedList linkedList) {
             System.out.print("Printing data ..... => ");
@@ -81,7 +103,10 @@ public class LinkedList {
         node.insert(linkedList, 35);
         node.insert(linkedList, 45);
         node.insertAtFront(linkedList, 33);
+        node.insertAtFront(linkedList, 200);
+        node.deleteNode(33);
         node.insertAtFront(linkedList, 330);
+        node.deleteNode(330);
         node.printData(linkedList);
     }
 }
