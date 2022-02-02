@@ -5,7 +5,7 @@ package com.cs.dsa.linkedlist;
  */
 
 public class DoublyLinkedList {
-    Node head;
+    static Node head;
     /*
      * DLL has Node
      * Node has Previous Node, Next Node and Data
@@ -51,6 +51,12 @@ public class DoublyLinkedList {
         newNode.prev = lastNode;
     }
 
+    // let's  delete the passed node
+    void deleteHeadNode(Node node) {
+       node.next.prev = null;
+       head = node.next;
+    }
+
     // traverse forward direction
     void traverseFromForward() {
         Node tempNode = head;
@@ -70,6 +76,8 @@ public class DoublyLinkedList {
         doublyLinkedList.addAtRear(25);
         doublyLinkedList.addAtRear(55);
         doublyLinkedList.traverseFromForward();
+        doublyLinkedList.deleteHeadNode(head);
+        doublyLinkedList.deleteHeadNode(head);
+        doublyLinkedList.traverseFromForward();
     }
-
 }
