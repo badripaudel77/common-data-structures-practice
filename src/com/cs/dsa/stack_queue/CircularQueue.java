@@ -19,32 +19,55 @@ package com.cs.dsa.stack_queue;
 
 */
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+/*
+Queue of size 4
+initially R = F = -1
+on first insertion F=R=0
+elements[rear] = element, R++
+Rear             Front
+---------------------
+-    -    -    -    -
+---------------------
+
+ */
 public class CircularQueue {
 
     int size;
     int[] elements;
     int front, rear;
 
+    // Create a circular queue
     public CircularQueue(int size) {
         this.size = size;
         elements = new int[size];
-
         //initially set both front and rear to -1
-        front = rear = -1;
+        front = -1;
+        rear = -1;
     }
 
     private void enqueue(int item) {
+        System.out.println("Trying to add item = " + item);
         if(isFull()) {
             System.out.println("Queue is already full");
             return;
         }
         //add to the queue, first time enqueue
-        if(front == -1) front = front + 1;
-
-        rear = (rear + 1) % size;  // position to insert
+        if(front == -1 && rear == -1) {
+            front = 0;
+            rear = 0;
+        }
+        // circular queue
+        else if(front !=0 && rear == size -1) {
+            rear = 0;
+        }
+        else {
+            rear++;
+        }
         elements[rear] = item;
         System.out.println("Item " + item + " added to the queue.");
-
     }
 
     private void dequeue() {
@@ -59,30 +82,49 @@ public class CircularQueue {
             front = -1; // reset the queue
             rear = -1;
         }
-
-       else {
-           front = (front + 1) % size; //increase the front by one.
+        else if (front == size -1) {
+            front = 0;
         }
-        System.out.println("Item removed from the queue" + itemToDelete);
+       else {
+           front = front + 1; //increase the front by one.
+        }
+        System.out.println("Item removed from the queue = " + itemToDelete);
     }
 
     private boolean isEmpty() {
-
+        System.out.println("isEmpty() : Front = " + front + " and Rear = " + rear);
         return front == -1;
     }
 
     private boolean isFull() {
-
+        System.out.println("isFull() : Front = " + front + " and Rear = " + rear);
         if(front == 0 && rear == size -1) return  true;
-        return front == rear + 1;
+        return false;
     }
 
     private void size() {
-        System.out.println("Total size of the queue is : " + size);
+        System.out.println("Total size of the queue is : " + size + " and Front = " + front + " and Rear = " + rear);
     }
 
+     void displayElementsInQueue() {
+        if(front == -1) {
+            System.out.println("No Elements to display");
+            return;
+        }
+         System.out.print("Elements are\n-----------  ");
+        for(int i = front; i<= rear; i++) {
+            System.out.print(elements[i] + " ");
+        }
+         System.out.println(" -----------");
+    }
+    static void displayElements(CircularQueue circularQueue) {
+        // display the elements in queue
+        IntStream stream = Arrays.stream(circularQueue.elements);
+        System.out.println("\nPrinting elements here :\n--------------------------" );
+        stream.forEach(value -> System.out.print(value + "  "));
+        System.out.println("\n--------------------------");
+    }
     public static void main(String[] args) {
-
         CircularQueue circularQueue = new CircularQueue(5);
 
         circularQueue.size();
@@ -90,11 +132,18 @@ public class CircularQueue {
         circularQueue.enqueue(4);
         circularQueue.enqueue(3);
         circularQueue.enqueue(2);
-
+        circularQueue.displayElementsInQueue();
         circularQueue.enqueue(100);
         circularQueue.enqueue(90);
         circularQueue.enqueue(0);
+        circularQueue.enqueue(190);
+        displayElements(circularQueue);
         circularQueue.dequeue();
         circularQueue.dequeue();
+        circularQueue.dequeue();
+        circularQueue.dequeue();
+        circularQueue.dequeue();
+        circularQueue.dequeue();
+        circularQueue.displayElementsInQueue();
     }
 }
