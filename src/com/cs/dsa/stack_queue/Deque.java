@@ -4,21 +4,23 @@ package com.cs.dsa.stack_queue;
 
 Deque or Double Ended Queue is a type of queue in which insertion and removal of elements can be performed
 from either from the front or rear.
-Thus, it does not follow FIFO rule (First In First Out).
+Thus,it does not follow FIFO rule (First In First Out).
 
 operations :
-            -Add from the front, Add from the back,
-            -Remove from the front, Remove from the back, get front and get back,
-            -isEmpty and isFull
-*/
+            - Add from the front, Add from the back,
+            - Remove from the front, Remove from the back,
+            - get front and get back,
+            - isEmpty and isFull
 
-import org.w3c.dom.ls.LSOutput;
+Docs : https://www.javatpoint.com/ds-deque
+*/
 
 public class Deque {
     int[] arr;
     int size;
     int front, rear;
 
+    // Create the Deque of given size
     public Deque(int size) {
         this.arr = new int[size];
         this.front = -1;
@@ -33,16 +35,19 @@ public class Deque {
             System.out.println("Queue is already full.");
             return;
         }
-
         //if first time insertion
         if (front == -1 && rear == -1) {
             front = 0;
             rear = 0;
         }
-        else if(front == 0) front = size -1;
-        else  --front;
+        // Front at first pos
+        else if (front == 0) {
+            front = size - 1;
+        } else {
+            front--;
+        }
         arr[front] = item;
-        System.out.println("Item" + item + " Added successfully from the front side..");
+        System.out.println("Item = " + item + " Added successfully from the front side..");
     }
 
     //insert from the back side
@@ -53,24 +58,21 @@ public class Deque {
         }
 
         //if first time insertion
-        if (front == -1 && rear == -1) {
+        if (front == -1) {
             front = 0;
             rear = 0;
-            // System.out.println("insert back...");
         }
-
-        if (rear == size - 1) rear = 0; //implementation of circular queue
-
-        else {
+        if (rear == size - 1) {
+            rear = 0; //implementation of circular queue
+        } else {
             rear++;
-            arr[rear] = item;
-            System.out.println("Item " + item + " Added successfully from the back side..");
         }
+        arr[rear] = item;
+        System.out.println("Item = " + item + " Added successfully from the back side..");
     }
 
     //remove from the front side
     private void deleteFront() {
-
         if (isEmpty()) {
             System.out.println("Queue is already empty.");
             return;
@@ -81,23 +83,20 @@ public class Deque {
             rear = -1;
         }
         //If front points to the last element in a queue
-        else if (front == size - 1)
+        else if (front == size - 1) {
             front = 0;
-
-        else {
+        } else {
             front++;
-            System.out.println("Item deleted successfully from the front.");
         }
+        System.out.println("Item deleted successfully from the front.");
     }
 
     //remove from the back side
     private void deleteRear() {
-
         if (isEmpty()) {
             System.out.println("Queue is already empty.");
             return;
         }
-
         //if only one item.
         if (front == 0 && rear == 0) {
             front = -1;
@@ -106,11 +105,10 @@ public class Deque {
         //If front points to the last element in a queue
         else if (rear == 0) {
             rear = size - 1;
-        }
-        else {
+        } else {
             rear--;
-            System.out.println("Item  deleted successfully from the back.");
         }
+        System.out.println("Item  deleted successfully from the back.");
     }
 
     private boolean isEmpty() {
@@ -118,15 +116,15 @@ public class Deque {
     }
 
     private boolean isFull() {
-        if (front == 0 && rear == size - 1) return true;
-        return front == rear + 1; // rear == front-1
+        if (front == 0 && rear == size - 1 || (front == rear + 1)) return true;
+        return false;
     }
 
     public void getFront() {
-        //if(front == -1) {
-        //      System.out.println("There is no element found.");
-       //      return;
-     // }
+        if (front == -1) {
+            System.out.println("There is no element found.");
+            return;
+        }
         if (isEmpty()) {
             System.out.println("No element found.");
             return;
@@ -135,10 +133,10 @@ public class Deque {
     }
 
     public void getRear() {
-        //if (rear == -1) {
-          //  System.out.println("There is no element found.");
-            //return;
-        //}
+        if (rear == -1) {
+            System.out.println("There is no element found.");
+            return;
+        }
         if (isEmpty()) {
             System.out.println("No element found.");
             return;
@@ -146,23 +144,37 @@ public class Deque {
         System.out.println("Rear element of the queue is : " + arr[rear]);
     }
 
+    public void display() {
+        int i = front;
+        System.out.print("\nElements are : ");
+        while (i != rear) {
+            System.out.print(arr[i] + " ");
+            i = (i + 1) % size;
+        }
+        System.out.print(arr[i] + " ");
+        System.out.println();
+    }
+
     public static void main(String[] args) {
         Deque deque = new Deque(5);
 
-        deque.insertFront(5);
-        deque.insertFront(6);
-        deque.insertFront(6);
-        deque.insertFront(6);
-        deque.insertFront(6);
-        deque.insertFront(6);
+        deque.insertFront(15);
+        deque.insertFront(16);
+        deque.insertFront(26);
+        deque.insertFront(36);
+        //  deque.insertFront(46);
 
-        deque.insertBack(6);
+        deque.display();
+        deque.insertBack(66);
+        deque.display();
+
         deque.getFront();
         deque.getRear();
+        deque.display();
         deque.deleteRear();
-
+        deque.display();
         deque.deleteFront();
-        deque.getFront();
-
+        deque.display();
+        deque.getRear();
     }
 }
