@@ -55,11 +55,15 @@ public class BinaryTree {
         binaryTree.rootNode = node;
         BinaryTree.Node node2 = binaryTree.new Node(3);
         BinaryTree.Node node3 = binaryTree.new Node(26);
+        Node node4 = binaryTree.new Node(20);
+        Node node5  = binaryTree.new Node(30);
 
         node.left = node2; // smaller to left
         node.right = node3; // larger to right
+        node.right.left = node4;
+        node.right.right = node5;
 
-        Node foundNode = binaryTree.searchNode(null, binaryTree.rootNode);
+        Node foundNode = binaryTree.searchNode(node5, binaryTree.rootNode);
         System.out.println(foundNode !=null ? "Node found with element = "+ foundNode.element : "No Node found");
     }
 
