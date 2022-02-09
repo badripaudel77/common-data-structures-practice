@@ -30,6 +30,10 @@ public class Queue {
         this.rear = -1;
     }
 
+    public Queue() {
+
+    }
+
     private void enqueue(int item) {
            if(isFull()) {
                System.out.println("Queue is already full. ");

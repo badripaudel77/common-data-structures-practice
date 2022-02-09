@@ -1,4 +1,7 @@
 package com.cs.dsa.binarytrees;
+
+import sun.misc.Queue;
+
 /*
  * Created By Badri Paudel on 02/08/2022 - Software Developer at Threadcode Technlogies
  * Binary Tree in DS, is a tree that has at most two children, Left (L) and Right (R).
@@ -8,11 +11,12 @@ package com.cs.dsa.binarytrees;
  * For example, the file system on a computer:
  */
 public class BinaryTree {
-    Node rootNode;
+    public Node rootNode;
 
     public BinaryTree() {
         rootNode = null;
     }
+
     // Creating a Node in Binary Node, as BT has many nodes, which ultimately have Left and Right
     class Node {
         int element; //data
@@ -24,47 +28,90 @@ public class BinaryTree {
             this.right = null;
         }
     }
+
     /*
      * Return the node if present else null
      * Travel from root node
      * if element to be searched is less than value at root node, go to left node else right node
      */
     protected Node searchNode(Node searchingNode, Node root) {
-        if(rootNode == null || searchingNode == null) {
+        if (rootNode == null || searchingNode == null) {
             return null;
         }
         Node rootNode = root;
-        while (rootNode !=null) {
-            if((searchingNode.element) == rootNode.element) {
+        while (rootNode != null) {
+            if ((searchingNode.element) == rootNode.element) {
                 return rootNode;
-            }
-            else if((searchingNode.element)< rootNode.element) {
+            } else if ((searchingNode.element) < rootNode.element) {
                 rootNode = rootNode.left;
-            }
-            else {
+            } else {
                 rootNode = rootNode.right;
             }
         }
         return null;
     }
 
-    public static void main(String[] args) {
+    /*
+     * Created by Badri Paudel on : 02/09/2022
+     * Tree traversal is the process of visiting each node once only in any order [n!] .
+     * BFS starts at lowest or(highest) node visiting each node level by level until all the
+       nodes are visited and moving up (or down)
+     * Docs : https://en.wikipedia.org/wiki/Breadth-first_search
+    */
+
+    protected void searchBFS() throws InterruptedException {
+        Node rNode = rootNode; // access to the root node
+        Queue queue = new Queue(); // queue to store visited nodes
+        if (rNode != null) {
+            queue.enqueue(rNode); // visited add to the queue
+            // visit all by looping
+            System.out.print("Visiting values ::: ");
+            while (!queue.isEmpty()) {
+                rNode = (Node) queue.dequeue(); // pop that element off
+                System.out.print(" " + rNode.element);
+                // VisIts left node and puts it into the queue
+                if (rNode.left != null) {
+                    queue.enqueue(rNode.left);
+                }
+                // visits right node and put it in the queue
+                if (rNode.right != null) {
+                    queue.enqueue(rNode.right);
+                }
+            }
+            System.out.println(" = Travelling BFS finished");
+        }
+    }
+
+    protected void searchDFS() {
+        /*
+          * Tree traversal is the process of visiting each node once only in any order [n!] .
+          * DFS proceeds as far as possible to the left(or right) then backs up until the first one and repeat this until all the
+            nodes are visited.
+          * Docs : https://en.wikipedia.org/wiki/Depth-first_search
+        */
+    }
+
+    public static void main(String[] args) throws InterruptedException {
         BinaryTree binaryTree = new BinaryTree();
 
         BinaryTree.Node node = binaryTree.new Node(6);
         binaryTree.rootNode = node;
         BinaryTree.Node node2 = binaryTree.new Node(3);
+        BinaryTree.Node node_ = binaryTree.new Node(4);
         BinaryTree.Node node3 = binaryTree.new Node(26);
         Node node4 = binaryTree.new Node(20);
-        Node node5  = binaryTree.new Node(30);
+        Node node5 = binaryTree.new Node(30);
 
-        node.left = node2; // smaller to left
+        node.left = node2;// smaller to left
+        node.left.right = node_;
         node.right = node3; // larger to right
         node.right.left = node4;
         node.right.right = node5;
 
         Node foundNode = binaryTree.searchNode(node5, binaryTree.rootNode);
-        System.out.println(foundNode !=null ? "Node found with element = "+ foundNode.element : "No Node found");
+        System.out.println(foundNode != null ? "Node found with element = " + foundNode.element : "No Node found");
+        System.out.println("---------------------------\n---------------------");
+        binaryTree.searchBFS();
     }
 
 }
