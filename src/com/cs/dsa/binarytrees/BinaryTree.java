@@ -82,13 +82,46 @@ public class BinaryTree {
         }
     }
 
-    protected void searchDFS() {
         /*
           * Tree traversal is the process of visiting each node once only in any order [n!] .
           * DFS proceeds as far as possible to the left(or right) then backs up until the first one and repeat this until all the
             nodes are visited.
           * Docs : https://en.wikipedia.org/wiki/Depth-first_search
         */
+
+      //  searchDFS()
+        /*
+           Searches recursively
+         * Can search in three ways
+         * 1. InOrder [LVR] (left, root, right)
+         * 2. PreOrder[VLR] (Root, Left, Right)
+         * 3. PostOrder [LRV] (Left, right, root)
+         */
+    // Order : InOrder [LVR] (left, root, right)
+    protected void inOrder(Node root) {
+        if(root == null) return;
+        // recursive call
+        inOrder(root.left);
+        System.out.print(root.element + " -> ");
+        inOrder(root.right);
+    }
+
+    // PreOrder[VLR] (Root, Left, Right)
+    protected void preOrder(Node root) {
+        if(root == null) return;
+        System.out.print(root.element + " -> ");
+        // recursive call
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+
+    // PostOrder [LRV] (Left, Right, Root)
+    protected void postOrder(Node root) {
+        if(root == null) return;
+        // recursive call
+        postOrder(root.left);
+        postOrder(root.right);
+        System.out.print(root.element + " -> ");
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -112,6 +145,15 @@ public class BinaryTree {
         System.out.println(foundNode != null ? "Node found with element = " + foundNode.element : "No Node found");
         System.out.println("---------------------------\n---------------------");
         binaryTree.searchBFS();
+
+        System.out.print("In-Order DFS : ");
+        binaryTree.inOrder(binaryTree.rootNode);
+        System.out.println();
+        System.out.print("Pre-Order DFS : ");
+        binaryTree.preOrder(binaryTree.rootNode);
+        System.out.println();
+        System.out.print("Post-Order DFS : ");
+        binaryTree.postOrder(binaryTree.rootNode);
     }
 
 }
