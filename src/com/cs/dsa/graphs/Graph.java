@@ -68,7 +68,10 @@ public class Graph {
         System.out.println("len of adjacent list = " + graph.adjList.length);
         System.out.println("graph representation = " + graph.adjList[0] + ", " + graph.adjList[1] + "," + graph.adjList[2]);
 
-        System.out.print("Breadth First ::: ");
+        System.out.print("Breadth First ::: \n");
         graph.breadthFirstSearch(1, 3);
+        graph.breadthFirstSearch(0, 3);
+        graph.breadthFirstSearch(2, 3);
+        graph.breadthFirstSearch(3, 3); // exception thrown
     }
 }
