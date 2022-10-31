@@ -51,6 +51,17 @@ public class BinaryTree {
         return null;
     }
 
+    // update the tree
+    protected void updateTree(Node searchingNode, Node root) {
+        Node node = searchNode(searchingNode, root);
+        if(node != null) {
+            // do however you want to updated ...
+            node.element = 3455;
+            node.left = new Node(45);
+            // and so on....
+        }
+    }
+
     /*
      * Created by Badri Paudel on : 02/09/2022
      * Tree traversal is the process of visiting each node once only in any order [n!] .
@@ -124,6 +135,14 @@ public class BinaryTree {
         System.out.print(root.element + " -> ");
     }
 
+    // delete the leaf node
+    protected void deleteLeafNode(Node nodeToBeDeleted , Node rootNode) {
+        Node node = searchNode(nodeToBeDeleted, rootNode);
+        if(node != null && node.left == null && node.right == null) {
+            node = null;
+        }
+    }
+
     public static void main(String[] args) throws InterruptedException {
         BinaryTree binaryTree = new BinaryTree();
 
@@ -143,6 +162,7 @@ public class BinaryTree {
 
         Node foundNode = binaryTree.searchNode(node5, binaryTree.rootNode);
         System.out.println(foundNode != null ? "Node found with element = " + foundNode.element : "No Node found");
+
         System.out.println("---------------------------\n---------------------");
         binaryTree.searchBFS();
 
