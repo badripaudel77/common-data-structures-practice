@@ -61,11 +61,15 @@ public class LinearSearch {
                 break;
             }
         }
-        if (flag) System.out.println("Yes the element " + itemToFind +
+        if (flag) {
+            System.out.println("Yes the element " + itemToFind +
                     " is present in the given items array. And it is found after "
                     + (iteratinsToFindElem == 1? +iteratinsToFindElem + " iteration ": " iterations"));
+        }
 
-        else System.out.println("Sorry the element " + itemToFind + " is not present in the given items array.");
+        else {
+            System.out.println("Sorry the element " + itemToFind + " is not present in the given items array.");
+        }
     }
     //update element
     public static void updateElement(int[] items, int elemToUpdate, int updateValue) {
@@ -93,7 +97,9 @@ public class LinearSearch {
             System.out.println("sorry the element "+ elemToUpdate + " is not present in items array.");
             return;
         }
-        else items[index] = updateValue;
+        else {
+            items[index] = updateValue;
+        }
 
         System.out.print("After updating an element " + elemToUpdate + " at index " + index + " array is : ");
         for (i = 0; i < lenOfItems; i++) {

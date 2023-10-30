@@ -11,6 +11,9 @@ package com.cs.dsa.linkedlist;
 
 */
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LinkedList {
     Node head;
     //create class Node that will have data and next, head will point to the first Node
@@ -94,6 +97,7 @@ public class LinkedList {
     }
 
     public static void main(String[] args) {
+        System.out.println(System.identityHashCode("hello") == System.identityHashCode(new String("hello")));
         LinkedList linkedList = new LinkedList();
         LinkedList.Node node = linkedList.new Node(4);
 

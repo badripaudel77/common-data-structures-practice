@@ -26,13 +26,10 @@ public class BubbleSort {
         }
 
         //loop for number of elements
-        for(i = 0; i < len; i++)
-        {
+        for(i = 0; i < len; i++) {
             //loop for sorting
-            for(j = 0; j < len-1; j++)
-            {
-                if(elements[j] > elements[j+1])
-                {
+            for(j = 0; j < len-1; j++) {
+                if(elements[j] > elements[j+1]) {
                     swap(j, j+1, elements);
                 }
             }

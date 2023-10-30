@@ -20,17 +20,12 @@ import java.util.Arrays;
 public class InsertionSort {
     public static void main(String[] args) {
         int elements[] = { -1,9,7,0 };
-
         System.out.println("original array is : " + Arrays.toString(elements));
-
         insertionSort(elements);
-
         System.out.println("After Sorting Array is : " + Arrays.toString(elements));
-
     }
 
     public static void insertionSort(int [] elements) {
-
         int len = elements.length;
         int i, value, position, temp;
 

@@ -39,7 +39,9 @@ public class Stack {
             elements[top] = item;
             System.out.println("Item "+ item + " inserted successfully");
         }
-        else System.out.println("Stack is already full.");
+        else {
+            System.out.println("Stack is already full.");
+        }
     }
 
     //remove the item
@@ -50,7 +52,9 @@ public class Stack {
             System.out.println("Item " + elements[top] + " deleted successfully.");
             top --;
         }
-        else  System.out.println("Stack is empty already.");
+        else {
+            System.out.println("Stack is empty already.");
+        }
     }
 
     // means if top = size -1 [ as index starts from 0]

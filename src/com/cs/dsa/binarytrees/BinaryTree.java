@@ -3,7 +3,7 @@ package com.cs.dsa.binarytrees;
 import sun.misc.Queue;
 
 /*
- * Created By Badri Paudel on 02/08/2022 - Software Developer at Threadcode Technlogies
+ * Created By Badri Paudel on 02/08/2022 - Software Developer at Threadcode Technologies
  * Binary Tree in DS, is a tree that has at most two children, Left (L) and Right (R).
  * Refer to : https://en.wikipedia.org/wiki/Binary_tree#:~:text=In%20computer%20science%2C%20a%20binary,child%20and%20the%20right%20child.&text=It%20is%20also%20possible%20to,is%20an%20ordered%2C%20rooted%20tree.
  * Why Trees?

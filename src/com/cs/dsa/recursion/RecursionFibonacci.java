@@ -4,7 +4,7 @@ public class RecursionFibonacci {
 
     public static void main(String[] args) {
         int n = 5;
-        System.out.print(" for n = "  + n + " series is : ");
+        System.out.print(" for n = "  + n + " series is : " + 0 + "  " + 1 + "  ");
         for(int i = 2; i< n; i++) {
             System.out.print(recursionFibonacci(i) + "   ");
         }
