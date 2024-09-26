@@ -50,12 +50,10 @@ public class LinkedList {
         // Insert at the beginning
         private void insertAtFront(LinkedList linkedList, int data) {
             Node newNode = new Node(data);
-            if (head == null) {
-                head = newNode;
-            } else {
+            if (head != null) {
                 newNode.next = head;
-                head = newNode;
             }
+            head = newNode;
         }
 
         // provided the key, it deletes the node

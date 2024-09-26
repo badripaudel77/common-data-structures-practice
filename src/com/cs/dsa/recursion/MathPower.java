@@ -26,7 +26,7 @@ public class MathPower {
 
         else if(exp == 1) return base;
 
-        else if(exp < 0 && exp == -1) return   (float) 1 / base;
+        else if(exp == -1) return   (float) 1 / base;
 
         else  if(exp < 0) return  (float) 1 / calcPower(base, (-1) * exp);
 

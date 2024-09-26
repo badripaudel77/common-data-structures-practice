@@ -4,9 +4,7 @@ package com.cs.dsa.comparator;
  * It's java specific, comparator, comparable to compare especially some objects type for example
  */
 
-import java.util.Comparator;
-
-//public class Student implements Comparator<Student> { // if comparator implement compare(....) if comparable impelment compareTo(..)
+//public class Student implements Comparator<Student> { // if comparator implement compare(....) if comparable implements compareTo(..)
 public class Student implements Comparable<Student> {
     private String name;
     private Integer roll;
