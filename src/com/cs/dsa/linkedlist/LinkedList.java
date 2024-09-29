@@ -1,111 +1,209 @@
 package com.cs.dsa.linkedlist;
 
-/*
-   In LinkedList elements are linked using pointers, Collection of Nodes.
-   Node,it has data & next that points to the data of the next node.[ Node here itself can be a class with data & next field ]
-
-   Node : data, next
-   Node : head [ will point to the first Node ]
-   Node : next [ will point to the next Node ],
-   only the data value is int, others are Node
-
-*/
-
+/**
+ * LinkedList Version2 (V2)
+ * Implement: append(value), print, remove last, prepend(value), remove first, get(index), set(index, value),
+ * insert(index, value), remove(index), reverse
+ */
 public class LinkedList {
     Node head;
-    //create class Node that will have data and next, head will point to the first Node
+    Node tail;
+    int length;
+
+    public LinkedList() {
+
+    }
+
+    public LinkedList(int value) {
+        head = new Node(value);
+        tail = head;
+        length = 1;
+    }
 
     class Node {
-        int data;
+        int value;
         Node next;
 
-        //create the node first time
-        public Node(int data) {
-            this.data = data;
+        public Node(int value) {
+            this.value = value;
             this.next = null;
         }
+    }
 
-        // Insert at the end
-        private void insert(LinkedList linkedList, int data) {
-            //create node out of that data
-            Node newNode = new Node(data);
-
-            /* see if the list is empty, it's going to be first node */
-            if (linkedList.head == null) {
-                head = newNode;
-            }
-
-            //else insert node after traversing till end of the node
-            else {
-                Node lastNode = linkedList.head;
-                while (lastNode.next != null) {
-                    lastNode = lastNode.next;
-                }
-                //insert
-                lastNode.next = newNode;
-            }
-            //System.out.println("Linked list is created => " + linkedList.head.data);
+    // Print all the values of all the nodes in the LinkedList : O(n)
+    public void printList() {
+        if(length == 0) {
+            System.out.println("Currently there are no nodes in the LL");
+            return;
         }
 
-        // Insert at the beginning
-        private void insertAtFront(LinkedList linkedList, int data) {
-            Node newNode = new Node(data);
-            if (head != null) {
-                newNode.next = head;
-            }
+        System.out.print("LinkedList has following Node/s (with value/s): ");
+        Node temp = head;
+        if(temp == null) return;
+        while(temp != null) {
+            System.out.print(temp.value + " => ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    // Add to the head of the LinkedList : O(1)
+    public void prepend(int value) {
+        Node newNode = new Node(value);
+        // Empty LL : head == null || tail == null
+        if(length == 0) {
+            head = tail = newNode;
+        }
+        if(length > 0) {
+            Node temp = head;
             head = newNode;
+            head.next = temp;
         }
-
-        // provided the key, it deletes the node
-        private void deleteNode(int key) {
-            Node headNode = head; // get the current head
-            Node prevNode = null; // initialize prev. node to null
-            // if node to be deleted is head itself
-            if(headNode.data == key) {
-                head = headNode.next;
-                return;
-            }
-           // if node to be deleted is other than head itself, just traverse
-           while (headNode!= null && headNode.data !=key) {
-               prevNode = headNode;
-               headNode = prevNode.next;
-           }
-           // not found
-           if(headNode == null) {
-               return;
-           }
-           // found
-           prevNode.next = headNode.next;
-        }
-
-        //print the data
-        private void printData(LinkedList linkedList) {
-            System.out.print("Printing data ..... => ");
-            Node node = linkedList.head; //get the first Node with the help of the Head
-
-            while (node != null) {
-                System.out.print(node.data + "   ");
-                node = node.next;
-            }
-            System.out.println();
-        }
+        length++;
+        System.out.printf("Node with value \"%d\" created and prepended to the LL \n", value);
     }
 
-    public static void main(String[] args) {
-        LinkedList linkedList = new LinkedList();
-        LinkedList.Node node = linkedList.new Node(4);
-
-        node.insert(linkedList, 5);
-        node.insert(linkedList, 15);
-        node.insert(linkedList, 25);
-        node.insert(linkedList, 35);
-        node.insert(linkedList, 45);
-        node.insertAtFront(linkedList, 33);
-        node.insertAtFront(linkedList, 200);
-        node.deleteNode(33);
-        node.insertAtFront(linkedList, 330);
-        node.deleteNode(330);
-        node.printData(linkedList);
+    // get the node at given index : O(n)
+    public Node getByIndex(int index) {
+        if(length <= 0 || index >= length) {
+            System.out.println("Node at index " + index + " doesn't exist.");
+            return null;
+        }
+        Node temp = head;
+        for (int i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+        System.out.println("Getting Node at index : " + index + " with value : " + temp.value + " => " + temp);
+        return temp;
     }
+    
+    // get the node with given value : O(n)
+    public Node getByValue(int value) {
+        Node node = null;
+        if(length <= 0) {
+            System.out.println("List is empty");
+            return null;
+        }
+        Node temp = head;
+        for (int i = 0; i < length; i++) {
+            if(temp.value == value) {
+                node = temp;
+                break;
+            }
+            temp = temp.next;
+        }
+        System.out.println("Getting Node with given value : " + value + " => " + node);
+        return node;
+    }
+
+    // Removes first node : O(1)
+    public Node removeFirst() {
+        Node temp = head;
+        if(length == 0) {
+            System.out.println("There is no node to be removed.");
+            return null;
+        }
+        // Means, there is a head so remove it.
+        if(length == 1) {
+            head = tail = null;
+            length--;
+            System.out.println("First node with value : " + temp.value + " removed => " + temp);
+            return temp;
+        }
+        head = temp.next;
+        temp.next = null;
+        length--;
+        System.out.println("First node with value : " + temp.value + " removed => " + temp);
+        return temp;
+    }
+
+    // Remove last : O(n)
+    public Node removeLast() {
+        if(length == 0) return null;
+        if(length == 1) {
+             Node node = removeFirst();
+             return node;
+        }
+        Node temp = head;
+        while(temp.next.next != null) {
+            temp = temp.next; // points to second last, which will be the final tail.
+        }
+        temp.next = null;
+        tail = temp;
+        length--;
+        System.out.println("Last node removed, now tail points to " + tail + " which has value of : " + tail.value);
+        return temp; // Just returning the current tail.
+    }
+
+    // Remove the node at given index : O(n)
+    public Node removeNodeAtIndex(int index) {
+        if(length == 0 || index < 0 || index >= length) {
+            System.out.println("Invalid removed for index " + index + " when length is just : " + length);
+            return null;
+        }
+        if(index == 0) {
+            return removeFirst();
+        }
+        if(index == length-1) {
+            return removeLast();
+        }
+        Node prev = getByIndex(index-1);
+        Node nodeToBeRemoved = prev.next;
+        prev.next = nodeToBeRemoved.next;
+        nodeToBeRemoved.next = null;
+        length--;
+        System.out.println("Node at index : " + index + " removed which had value of : " + nodeToBeRemoved.value);
+        return nodeToBeRemoved;
+    }
+
+    public Node getHead() {
+        System.out.println("Currently head is pointing at node : " + head + " with value: " + head.value);
+        return this.head;
+    }
+
+    public Node getTail() {
+        System.out.println("Currently tail is pointing at node : " + tail + " with value: " + tail.value);
+        return this.tail;
+    }
+
 }
 
+class Runner {
+    public static void main(String[] args) {
+        LinkedList linkedList = new LinkedList(10);
+        linkedList.printList();
+
+        linkedList.prepend(12);
+        linkedList.prepend(14);
+        linkedList.printList();
+
+        LinkedList.Node nodeByIndex = linkedList.getByIndex(2);
+        System.out.println("Node by index : " + nodeByIndex);
+        LinkedList.Node nodeByValue = linkedList.getByValue(13);
+        System.out.println("Node by value : " + nodeByValue);
+
+        linkedList.removeFirst();
+        linkedList.removeFirst();
+        linkedList.removeFirst();
+        linkedList.removeFirst();
+        linkedList.printList();
+
+        linkedList.removeLast();
+
+        linkedList.prepend(1);
+        linkedList.prepend(3);
+        linkedList.prepend(5);
+        linkedList.prepend(25);
+        linkedList.prepend(35);
+        linkedList.printList();
+
+        linkedList.removeLast();
+        linkedList.printList();
+
+        linkedList.removeNodeAtIndex(1);
+        linkedList.printList();
+
+        linkedList.getHead();
+        linkedList.getTail();
+    }
+}
