@@ -1,6 +1,7 @@
 package com.cs.dsa.binarytrees;
 
-import sun.misc.Queue;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /*
  * Created By Badri Paudel on 02/08/2022 - Software Developer at Threadcode Technologies
@@ -62,21 +63,21 @@ public class BinaryTree {
 
     protected void searchBFS() throws InterruptedException {
         Node rNode = rootNode; // access to the root node
-        Queue queue = new Queue(); // queue to store visited nodes
+        Queue queue =  new LinkedList(); // queue to store visited nodes
         if (rNode != null) {
-            queue.enqueue(rNode); // visited add to the queue
+            queue.add(rNode); // visited add to the queue
             // visit all by looping
             System.out.print("Visiting values ::: ");
             while (!queue.isEmpty()) {
-                rNode = (Node) queue.dequeue(); // pop that element off
+                rNode = (Node) queue.poll(); // pop that element off
                 System.out.print(" " + rNode.element);
                 // VisIts left node and puts it into the queue
                 if (rNode.left != null) {
-                    queue.enqueue(rNode.left);
+                    queue.add(rNode.left);
                 }
                 // visits right node and put it in the queue
                 if (rNode.right != null) {
-                    queue.enqueue(rNode.right);
+                    queue.add(rNode.right);
                 }
             }
             System.out.println(" = Travelling BFS finished");

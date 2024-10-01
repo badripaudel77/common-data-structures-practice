@@ -156,6 +156,40 @@ public class LinkedList {
         return nodeToBeRemoved;
     }
 
+    // Reverse the LL: O(n), in-place
+    /**
+     * Swap head and tail and change the direction of the pointer (pointing to the next)
+     * Visualize by drawing a diagram, it should be clear.
+     * Main idea is to maintain pointer to prev, after and navigate accordingly until
+     * all the pointers(next) are flipped back.
+     */
+    public void reverse() {
+        if(length == 0) {
+            System.out.println("LL is empty, so can't be reversed.");
+            return;
+        }
+        if(length == 1) {
+            System.out.println("There is only one node in the LL, already reversed.");
+            return;
+        }
+        // swap the head and tail
+        Node temp = head;
+        head = tail;
+        tail = temp;
+
+        Node prev = null;
+        Node after;
+
+        // change the direction of the pointer
+        for(int i=0; i< length; i++) {
+            after = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = after;
+        }
+        System.out.println("LL is now reversed.");
+    }
+
     public Node getHead() {
         System.out.println("Currently head is pointing at node : " + head + " with value: " + head.value);
         return this.head;
@@ -205,5 +239,9 @@ class Runner {
 
         linkedList.getHead();
         linkedList.getTail();
+        linkedList.printList();
+
+        linkedList.reverse();
+        linkedList.printList();
     }
 }

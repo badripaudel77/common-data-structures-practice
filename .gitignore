@@ -1,2 +1,4 @@
 .idea/
 out/
+#*.iml
+#**/*.iml match all .iml file in all directory and sub-directory.
