@@ -1,5 +1,7 @@
 package com.cs.dsa.linkedlist;
 
+import java.util.Stack;
+
 /**
  * LinkedList Version2 (V2)
  * Implement: append(value), print, remove last, prepend(value), remove first, get(index), set(index, value),
@@ -190,6 +192,27 @@ public class LinkedList {
         System.out.println("LL is now reversed.");
     }
 
+    // Reverse LL V2 using extra space, TC: O(n), SC: O(n)
+    // Stack is the best ds for storing as it has LIFO pattern which suits the need for this particular case.
+    public void reverseLL() {
+        if(length == 0) {
+            System.out.println("LL is empty, so can't be reversed.");
+            return;
+        }
+        if(length == 1) {
+            System.out.println("There is only one node in the LL, already reversed.");
+            return;
+        }
+        Node temp = head;
+        Stack<Node> nodes = new Stack<>();
+        while(temp != null) {
+            nodes.add(temp);
+            temp = temp.next;
+        }
+        System.out.print("LL is now reversed, printing it : ");
+        nodes.forEach(node -> System.out.print(node.value + " => "));
+    }
+
     public Node getHead() {
         System.out.println("Currently head is pointing at node : " + head + " with value: " + head.value);
         return this.head;
@@ -243,5 +266,7 @@ class Runner {
 
         linkedList.reverse();
         linkedList.printList();
+
+        linkedList.reverseLL();
     }
 }
