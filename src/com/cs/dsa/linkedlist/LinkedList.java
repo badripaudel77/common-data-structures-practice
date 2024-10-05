@@ -211,6 +211,7 @@ public class LinkedList {
         }
         System.out.print("LL is now reversed, printing it : ");
         nodes.forEach(node -> System.out.print(node.value + " => "));
+        System.out.println();
     }
 
     public Node getHead() {
@@ -221,6 +222,45 @@ public class LinkedList {
     public Node getTail() {
         System.out.println("Currently tail is pointing at node : " + tail + " with value: " + tail.value);
         return this.tail;
+    }
+
+    /**
+     * Finds the middle node (one pointer moves one time and another two times, once we reach the end of the list, slow pointer is the middle element.
+     * Another approach is to count the no of nodes, and then get the node at length/2 index.
+     */
+    public Node findMiddleNode() {
+        Node oneTimePointer = head;
+        Node twoTimesPointer = head;
+
+        while(twoTimesPointer != null && twoTimesPointer.next != null) {
+            oneTimePointer = oneTimePointer.next;
+            twoTimesPointer = twoTimesPointer.next.next;
+        }
+        return oneTimePointer;
+    }
+
+    /**
+     * Detect if there is a loop (has a cycle or not) in the LL
+     * Same approach with slow & fast pointer, if they meet at same index(place), there is a loop, if fast reaches the end of the list, there is no loop
+     */
+    public void hasLoop() {
+       Node slow, fast;
+       slow = fast = head;
+       boolean hasCycle = false;
+
+        while(fast != null && fast.next != null) {
+           slow = slow.next;
+           fast = fast.next.next;
+           if(slow == fast) {
+               hasCycle = true;
+               break;
+           }
+       }
+        System.out.println("Does LL contain the cycle ? => " + hasCycle);
+    }
+
+    public void createLoop() {
+        tail.next = head;
     }
 
 }
@@ -268,5 +308,15 @@ class Runner {
         linkedList.printList();
 
         linkedList.reverseLL();
+
+        linkedList.printList();
+        linkedList.prepend(100);
+        linkedList.findMiddleNode();
+
+        // Create the cycle (loop): tail.next = head;
+        linkedList.createLoop();
+        linkedList.hasLoop();
+
+        // linkedList.printList(); // Gives infinite loop as it contains a cycle (modified above)
     }
 }
