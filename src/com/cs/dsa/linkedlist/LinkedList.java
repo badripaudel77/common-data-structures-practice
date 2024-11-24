@@ -1,5 +1,6 @@
 package com.cs.dsa.linkedlist;
 
+import java.util.HashSet;
 import java.util.Stack;
 
 /**
@@ -67,7 +68,7 @@ public class LinkedList {
 
     // get the node at given index : O(n)
     public Node getByIndex(int index) {
-        if(length <= 0 || index >= length) {
+        if(length <= 0 || index >= length || index < 0) {
             System.out.println("Node at index " + index + " doesn't exist.");
             return null;
         }
@@ -259,6 +260,135 @@ public class LinkedList {
         System.out.println("Does LL contain the cycle ? => " + hasCycle);
     }
 
+    /**
+     * @return kth Node
+     * Implement a method called findKthFromEnd that returns the k-th node from the end of the list.
+     * If the list has fewer than k nodes, the method should return null.
+     */
+    public Node findKthElement(int k) {
+        if(k < 0 || head == null) {
+            return null;
+        }
+        if(head.next == null && k == 0) {
+            return  head;
+        }
+        // First find the no of nodes in a LL
+        int count = 1;
+        Node temp = head;
+        while(temp.next != null) {
+            temp = temp.next;
+            count++;
+        }
+        Node secondTemp = head;
+        if(count - k < 0) {
+            return null;
+        }
+        // get the kth node from the end with the help of count
+        for(int i =0; i< count-k; i++) {
+            secondTemp = secondTemp.next;
+        }
+        return secondTemp;
+    }
+
+    /**
+     * Using slow and fast pointers
+     * Without using count / length attribute
+     */
+    public Node findKthElementV2(int k) {
+        Node fast = head;
+        Node slow = head;
+
+        for(int i = 0; i< k; i++) {
+            if(fast == null) {
+                return null;
+            }
+            fast = fast.next;
+        }
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow;
+    }
+
+    /**
+     * EG: Input: LinkedList: 1 -> 2 -> 3 -> 1 -> 4 -> 2 -> 5
+     * Output: LinkedList: 1 -> 2 -> 3 -> 4 -> 5
+     * Modify in-place
+     * Time : O(n), Space: O(n)
+     */
+    public void removeDuplicates() {
+        Node current = head;
+        Node prev = null;
+        if(current == null || current.next == null) {
+            // either head is null or LL has only one element / no duplicate
+            return;
+        }
+        HashSet<Integer> visitedNodes = new HashSet<>();
+        while(current != null) {
+            if(visitedNodes.contains(current.value)) {
+                // This is the duplicate so change the pointer
+                prev.next = current.next;
+            }
+            else {
+                visitedNodes.add(current.value);
+                prev = current;
+            }
+            current = current.next;
+        }
+        System.out.println("Duplicates removed if there were any.");
+    }
+
+    // Time: O(n), Space: O(1)
+    public Node removeDuplicatesV2() {
+        Node result = head;
+        while(head != null && head.next != null) {
+            if(head.value == head.next.value) {
+                head.next = head.next.next;
+            }
+            else {
+                head = head.next;
+            }
+        }
+        return result;
+     }
+
+    /**
+     * Sorted list:
+     * 1 - 1 -2 -3-3-5 -> null
+     * Output: 2 -> 5 -> null
+     */
+    public Node removeDuplicatesKeepDistinct() {
+        Node current = head;
+        Node prev = null;
+        Node resultHead = null;
+
+        if(current == null || current.next == null) {
+            return current;
+        }
+
+        while(current != null) {
+            if(current.next != null && current.value == current.next.value) {
+                int currentVal = current.value;
+                while (current != null && current.value == currentVal) {
+                    // skip the duplicate
+                    current = current.next;
+                }
+                if(prev != null) {
+                    prev.next = current;
+                }
+            }
+            else {
+                if(resultHead == null) {
+                    resultHead = current;
+                }
+                prev = current;
+                current = current.next;
+            }
+        }
+        return resultHead;
+     }
+
     public void createLoop() {
         tail.next = head;
     }
@@ -311,7 +441,18 @@ class Runner {
 
         linkedList.printList();
         linkedList.prepend(100);
+        linkedList.prepend(100);
         linkedList.findMiddleNode();
+
+         linkedList.findKthElement(2);
+        linkedList.findKthElement(5);
+        linkedList.findKthElement(3);
+        linkedList.findKthElement(4);
+        linkedList.findKthElement(1);
+        linkedList.findKthElementV2(2);
+         linkedList.removeDuplicates();
+        linkedList.removeDuplicatesKeepDistinct();
+        linkedList.removeDuplicatesV2();
 
         // Create the cycle (loop): tail.next = head;
         linkedList.createLoop();
