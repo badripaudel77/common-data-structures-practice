@@ -389,6 +389,33 @@ public class LinkedList {
         return resultHead;
      }
 
+     // Convert linked list's each node's value (this is just a code, in fact to convert LL's nodes' value to decimal, each node should have values in binary (1 or 0)
+     public void binaryToDecimal() {
+        // This approach
+//        Node current = head;
+//        int sum = 0;
+//        while(current != null) {
+//            sum = sum * 2 + current.value;
+//            current = current.next;
+//        }
+//         System.out.println("Final decimal value of linkedlist is: " + sum);
+         // Or this one
+             Node current = head;
+             Node temp = head;
+             int decimalValue = 0;
+             int listSize = 0;
+             while(current != null) {
+                 listSize++;
+                 current = current.next;
+             }
+             while(temp != null) {
+                 decimalValue = (int) (decimalValue + temp.value * Math.pow(2, listSize - 1));
+                 listSize--;
+                 temp = temp.next;
+             }
+            System.out.println("Final decimal value of linkedlist is: " + decimalValue);
+     }
+
     public void createLoop() {
         tail.next = head;
     }
@@ -453,6 +480,8 @@ class Runner {
          linkedList.removeDuplicates();
         linkedList.removeDuplicatesKeepDistinct();
         linkedList.removeDuplicatesV2();
+
+        linkedList.binaryToDecimal();
 
         // Create the cycle (loop): tail.next = head;
         linkedList.createLoop();
