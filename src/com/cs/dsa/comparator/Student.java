@@ -23,8 +23,10 @@ public class Student implements Comparable<Student> {
     @Override
     public int compareTo(Student o) {
        boolean isNotZero =  o.roll != 0;
-       if(isNotZero) return o.roll;
-       else return -1;
+       if(isNotZero) {
+           return o.roll;
+       }
+       return -1;
     }
 
 
