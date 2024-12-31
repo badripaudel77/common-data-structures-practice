@@ -156,6 +156,25 @@ public class DoublyLinkedList {
         return temp;
     }
 
+    public void reverseDLL() {
+        if(head == null || head.next == null) {
+            return;
+        }
+        DLLNode temp = null;
+        DLLNode current = head;
+
+        // swap head and tail
+        head = tail;
+        tail = current;
+
+        while(current != null) {
+            temp = current.next; // temporarily store next node
+            current.next = current.prev; // update prev in opposite direction
+            current.prev = temp;
+            current = temp;
+        }
+    }
+
     @Override
     public String toString() {
         return "(To String method) Head has info : " + head.info +  " and tail is pointing to : " + tail.info;
@@ -182,6 +201,7 @@ public class DoublyLinkedList {
         doublyLinkedList.addToHead(90);
         doublyLinkedList.getNodeByIndex(2);
         doublyLinkedList.removeNodeAtIndex(1);
+        doublyLinkedList.reverseDLL();
         System.out.println(doublyLinkedList);
     }
 }
