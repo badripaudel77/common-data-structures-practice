@@ -1,8 +1,6 @@
 package com.cs.dsa.hashtables;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class HashTable {
     List<Node> values;
@@ -28,6 +26,7 @@ public class HashTable {
         }
     }
 
+    // O(1), general case. However, if we need to traverse if collision occur, it will be O(n)
     public void set(String key, int value) {
         Node newNode = new Node(key, value);
         int index = getHash(key, hashTableSize);
@@ -43,6 +42,7 @@ public class HashTable {
         existingNode.next = newNode;
     }
 
+    // O(1), general case. However, if we need to traverse if collision occur, it will be O(n)
     public int get(String key) {
         int index = getHash(key, hashTableSize);
         Node node = values.get(index);
@@ -77,6 +77,21 @@ public class HashTable {
         }
     }
 
+    public Character firstNonRepeatingChar(String s) {
+        char[] arr = s.toCharArray();
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c: arr) {
+            Integer count = map.getOrDefault(c, 0);
+            map.put(c, count + 1);
+        }
+        for (char a: arr) {
+            if(map.get(a) == 1) {
+                return a;
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         HashTable hashTable = new HashTable();
         hashTable.printTable();
@@ -88,5 +103,9 @@ public class HashTable {
         int apple = hashTable.get("Apple");
         System.out.println("Apple has value : " + apple);
         System.out.println("Guava has value : " + hashTable.get("Guava"));
+
+        System.out.println("First non repeating character in leetcode : " + hashTable.firstNonRepeatingChar("leetcode"));
+        System.out.println("First non repeating character in hheello : " + hashTable.firstNonRepeatingChar("hheeello"));
+        System.out.println("First non repeating character in rraa : " + hashTable.firstNonRepeatingChar("rraa"));
     }
 }
