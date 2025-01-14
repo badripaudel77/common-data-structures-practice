@@ -92,6 +92,45 @@ public class HashTable {
         return null;
     }
 
+    public static List<List<String>> groupAnagrams(String[] strings) {
+        List<List<String>> anagramGroups = new ArrayList<>();
+        Map<String, List<String>> map = new HashMap<>();
+        for (String s: strings) {
+            char[] chars = s.toCharArray();
+            Arrays.sort(chars);
+            String current = String.valueOf(chars);
+
+            if(map.containsKey(current)) {
+                List<String> existingAnagramList = map.get(current);
+                existingAnagramList.add(s);
+                map.put(current, existingAnagramList);
+            }
+            else {
+                List<String> newList = new ArrayList<>();
+                newList.add(s);
+                map.put(current, newList);
+            }
+        }
+        for(String s: map.keySet()) {
+            anagramGroups.add(map.get(s));
+        }
+        return anagramGroups;
+    }
+
+    public int[] twoSum(int a[], int target) {
+        Map<Integer, Integer> entryMap = new HashMap<>();
+        for(int i = 0; i< a.length; i++) {
+            if(entryMap.containsKey(target - a[i])) {
+                return new int[] {i, entryMap.get(target - a[i])};
+            }
+            else {
+                entryMap.put(a[i], i);
+            }
+        }
+        return new int[]{};
+    }
+
+
     public static void main(String[] args) {
         HashTable hashTable = new HashTable();
         hashTable.printTable();
@@ -107,5 +146,12 @@ public class HashTable {
         System.out.println("First non repeating character in leetcode : " + hashTable.firstNonRepeatingChar("leetcode"));
         System.out.println("First non repeating character in hheello : " + hashTable.firstNonRepeatingChar("hheeello"));
         System.out.println("First non repeating character in rraa : " + hashTable.firstNonRepeatingChar("rraa"));
+
+        System.out.println("1st set:");
+        System.out.println(groupAnagrams(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
+
+        System.out.println("Indices of two sum : " + Arrays.toString(hashTable.twoSum(new int[]{2, 74, 11, 15, 7}, 9)));
+        System.out.println("Indices of two sum : " + Arrays.toString(hashTable.twoSum(new int[]{}, 0)));
+
     }
 }
