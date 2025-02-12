@@ -26,7 +26,7 @@ public class HashTable {
         }
     }
 
-    // O(1), general case. However, if we need to traverse if collision occur, it will be O(n)
+    // O(1), general case. However, if we need to traverse, if collision occur, it will be O(n)
     public void set(String key, int value) {
         Node newNode = new Node(key, value);
         int index = getHash(key, hashTableSize);
@@ -130,6 +130,24 @@ public class HashTable {
         return new int[]{};
     }
 
+    public List<Integer> subarraySum(int []nums, int target) {
+        int sum = 0;
+        Map<Integer, Integer> sumMap = new HashMap<>();
+        List<Integer> indices = new ArrayList<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if(sumMap.containsKey(sum - target)) {
+                indices.addAll(List.of(sumMap.get(sum - target) + 1, i));
+                return indices;
+            }
+            else {
+                sumMap.put(sum, i); // Sum at that index
+            }
+        }
+        return indices;
+    }
+
 
     public static void main(String[] args) {
         HashTable hashTable = new HashTable();
@@ -153,5 +171,8 @@ public class HashTable {
         System.out.println("Indices of two sum : " + Arrays.toString(hashTable.twoSum(new int[]{2, 74, 11, 15, 7}, 9)));
         System.out.println("Indices of two sum : " + Arrays.toString(hashTable.twoSum(new int[]{}, 0)));
 
+        List<Integer> indices1 = hashTable.subarraySum(new int[]{ 2, 3, 4, 5, 6}, 9);
+        List<Integer> indices2 = hashTable.subarraySum(new int[]{ 3, 4, 5, 6 }, 9);
+        System.out.println("sub array sum : " + indices1 +  ", " +  indices2);
     }
 }
