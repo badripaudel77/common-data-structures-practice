@@ -1,5 +1,8 @@
 package com.cs.dsa.binarytrees;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // BST
 public class BinaryTreeV2 {
     Node root;
@@ -76,12 +79,38 @@ public class BinaryTreeV2 {
         return false;
     }
 
+    // Traverse the tree using BFS method.
+    /**
+     * Visit nodes level by level
+     */
+    public List<Integer> bfsTraversal() {
+        List<Integer> result = new ArrayList<>();
+        List<Node> queue = new ArrayList<>();
+        Node current = root;
+        if(root == null) {
+            return result;
+        }
+        queue.add(current);
+        while(queue.size() > 0) {
+            current = queue.remove(0);
+            if(current.left != null) {
+                queue.add(current.left);
+            }
+            if(current.right != null) {
+                queue.add(current.right);
+            }
+            result.add(current.data); // visited
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         BinaryTreeV2 binaryTree = new BinaryTreeV2(50);
 
         binaryTree.insertNode(22);
         binaryTree.insertNode(25);
         binaryTree.insertNode(55);
+        binaryTree.insertNode(21);
 
         binaryTree.printTree(binaryTree.root);
         System.out.println();
@@ -91,5 +120,8 @@ public class BinaryTreeV2 {
         System.out.println(binaryTree.contains(binaryTree.root, 50));
         System.out.println(binaryTree.contains(binaryTree.root, 22));
         System.out.println(binaryTree.contains(binaryTree.root, 100));
+
+        List<Integer> result = binaryTree.bfsTraversal();
+        System.out.println("Result of BFS traversal : " + result);
     }
 }
