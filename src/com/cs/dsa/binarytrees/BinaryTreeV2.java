@@ -104,6 +104,64 @@ public class BinaryTreeV2 {
         return result;
     }
 
+    // DFS
+    //1. Pre-Order (VLR -> Root -> Left(Recursively) -> Right(Recursively)
+    public List<Integer> preOrderTraversal() {
+        List<Integer> result = new ArrayList<>();
+        Node current = root;
+        preOrder(current, result);
+        return result;
+    }
+
+    // 2. Post-Order (LRV -> Left(Recursively) -> Right(Recursively) -> Root
+    public List<Integer> postOrderTraversal() {
+        List<Integer> result = new ArrayList<>();
+        Node current = root;
+        postOrder(current, result);
+        return result;
+    }
+
+    // 3. In-Order (LVR -> Left(Rec) -> Root -> Right(Rec))
+    public List<Integer> inOrderTraversal() {
+        List<Integer> result = new ArrayList<>();
+        Node current = root;
+        inOrder(current, result);
+        return result;
+    }
+
+    public Integer findKthSmallestElement(int k) {
+        List<Integer> dfsResult = inOrderTraversal();
+        if(k <= dfsResult.size()) {
+            return dfsResult.get(k-1);
+        }
+        return null;
+    }
+
+    private void preOrder(Node current, List<Integer> result) {
+        if(current != null) {
+            result.add(current.data);
+            preOrder(current.left, result);
+            preOrder(current.right, result);
+        }
+    }
+
+    private void postOrder(Node current, List<Integer> result) {
+        if(current != null) {
+            postOrder(current.left, result);
+            postOrder(current.right, result);
+            result.add(current.data);
+        }
+    }
+
+    private void inOrder(Node current, List<Integer> result) {
+        if(current != null) {
+            inOrder(current.left, result);
+            result.add(current.data);
+            inOrder(current.right, result);
+        }
+    }
+
+
     public static void main(String[] args) {
         BinaryTreeV2 binaryTree = new BinaryTreeV2(50);
 
@@ -123,5 +181,13 @@ public class BinaryTreeV2 {
 
         List<Integer> result = binaryTree.bfsTraversal();
         System.out.println("Result of BFS traversal : " + result);
+
+        System.out.println("Result of DFS - Pre-Order traversal : " + binaryTree.preOrderTraversal());
+        System.out.println("Result of DFS - Post-Order traversal : " + binaryTree.postOrderTraversal());
+        System.out.println("Result of DFS - In-Order traversal : " + binaryTree.inOrderTraversal());
+
+        System.out.println("2nd smallest element is : " + binaryTree.findKthSmallestElement(2));
+        System.out.println("4th smallest element is : " + binaryTree.findKthSmallestElement(4));
+        System.out.println("10th smallest element is : " + binaryTree.findKthSmallestElement(10));
     }
 }
