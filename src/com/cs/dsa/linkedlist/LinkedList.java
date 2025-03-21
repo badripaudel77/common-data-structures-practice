@@ -420,12 +420,60 @@ public class LinkedList {
         tail.next = head;
     }
 
+    /**
+     * Merge two given sorted lists
+     * Return the head of the first list (no third list)
+     * l1.merge(l2) -> will return l1 that has head as smallest and other elements in ascending order
+     */
+
+    public Node merge(LinkedList firstList, LinkedList otherList) {
+        Node firstHead = firstList.getHead(); // first head
+        Node secondHead = otherList.getHead(); // second head
+        Node dummyNode = new Node(-1); // dummy node to handle edge cases and maintain link to sorted merged list.
+        Node tail = dummyNode; // as both are referencing same Node in memory, change in tail will keep change in dummyNode.
+
+        if(firstHead == null || secondHead == null) {
+            return null;
+        }
+        while (firstHead != null && secondHead != null) {
+            if(firstHead.value < secondHead.value) {
+                tail.next = firstHead;
+                firstHead = firstHead.next;
+            }
+            else {
+                tail.next = secondHead;
+                secondHead = secondHead.next;
+            }
+            tail = tail.next;
+        }
+        // remaining nodes
+        if(firstHead != null) {
+            tail.next = firstHead;
+        }
+        if(secondHead != null) {
+            tail.next = secondHead;
+        }
+        firstHead = dummyNode.next;
+        return firstHead;
+    }
+
 }
 
 class Runner {
     public static void main(String[] args) {
         LinkedList linkedList = new LinkedList(10);
         linkedList.printList();
+
+        LinkedList linkedList1 = new LinkedList(10);
+        LinkedList linkedList2 = new LinkedList(10);
+
+        linkedList1.prepend(9);
+        linkedList1.prepend(5);
+
+        linkedList2.prepend(7);
+        linkedList2.prepend(5);
+
+        linkedList.merge(linkedList1, linkedList2);
 
         linkedList.prepend(12);
         linkedList.prepend(14);
